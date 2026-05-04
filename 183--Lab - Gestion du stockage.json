@@ -1,0 +1,40 @@
+{
+    "Versions": [
+        {
+            "ETag": "\"b76b2b775023e60be16bc332496f8409\"",
+            "ChecksumAlgorithm": [
+                "CRC32"
+            ],
+            "ChecksumType": "FULL_OBJECT",
+            "Size": 30318,
+            "StorageClass": "STANDARD",
+            "Key": "files/file1.txt",
+            "VersionId": "Qm0QMLLG.uyBrxhHUCNMBdi7yT_arQRu",
+            "IsLatest": false,
+            "LastModified": "2026-05-04T11:52:14.000Z",
+            "Owner": {
+                "ID": "453b8f91632751beb9ca86cb0036f35baab47076c906395f9d93926ea09fbac7"
+            }
+        }
+    ],
+    "DeleteMarkers": [
+        {
+            "Owner": {
+                "ID": "453b8f91632751beb9ca86cb0036f35baab47076c906395f9d93926ea09fbac7"
+            },
+            "Key": "files/file1.txt",
+            "VersionId": "rJytBfmKvQ045D50wrilZUwd7V8VzDMg",
+            "IsLatest": true,
+            "LastModified": "2026-05-04T12:01:06.000Z"
+        }
+    ],
+    "RequestCharged": null,
+    "Prefix": "files/file1.txt"
+}
+
+/* "La sortie contient un DeleteMarkers et un bloc Versions. DeleteMarkers indique l'emplacement du marqueur de suppression. 
+Par exemple, si vous effectuez une opération aws s3 rm (ou une opération aws s3 sync avec l'option --delete), 
+il s'agit de la prochaine version à laquelle le fichier reviendra.
+
+Le bloc Versions contient la liste de toutes les versions disponibles. 
+Vous ne devriez avoir qu'une seule entrée de versions. Notez la valeur de VersionId pour pouvoir l'utiliser ultérieurement. "*/
