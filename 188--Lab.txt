@@ -1,0 +1,29 @@
+**********>> 188--Lab - Gestion des ressources à l'aide du balisage <<*********
+
+
+Pour rechercher toutes les instances de votre compte balisées avec la balise Project (Projet) et 
+une valeur ERPSystem, copiez la commande suivante et exécutez-la dans la fenêtre du terminal Linux :
+
+>>> aws ec2 describe-instances --filter "Name=tag:Project,Values=ERPSystem"
+
+Utilisez le paramètre --query pour limiter le résultat de la commande précédente uniquement 
+à l'ID d'instance de l'instance détectée :
+
+>>> aws ec2 describe-instances --filter "Name=tag:Project,Values=ERPSystem" --query 'Reservations[*].Instances[*].InstanceId'
+
+a commande suivante et exécutez-la dans la fenêtre du terminal Linux pour inclure à la fois 
+l'ID d'instance et la zone de disponibilité de chaque instance dans votre résultat renvoyé :
+
+>>> aws ec2 describe-instances --filter "Name=tag:Project,Values=ERPSystem" --query 'Reservations[*].Instances[*].{ID:InstanceId,AZ:Placement.AvailabilityZone}'
+
+
+Pour inclure la valeur de la balise Project (Projet) dans votre résultat, 
+copiez et exécutez la commande suivante dans le terminal Linux :
+
+>>> aws ec2 describe-instances --filter "Name=tag:Project,Values=ERPSystem" --query 'Reservations[*].Instances[*].{ID:InstanceId,AZ:Placement.AvailabilityZone,Project:Tags[?Key==`Project`] | [0].Value}'
+
+
+Enfin, ajoutez un deuxième filtre de balise pour voir uniquement les instances associées au projet nommé 
+ERPSystem qui appartiennent à l'environnement nommé development (développement) :
+
+>>> aws ec2 describe-instances --filter "Name=tag:Project,Values=ERPSystem" "Name=tag:Environment,Values=development" --query 'Reservations[*].Instances[*].{ID:InstanceId,AZ:Placement.AvailabilityZone,Project:Tags[?Key==`Project`] | [0].Value,Environment:Tags[?Key==`Environment`] | [0].Value,Version:Tags[?Key==`Version`] | [0].Value}'
